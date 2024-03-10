@@ -12,7 +12,6 @@ public final class Plugin extends JavaPlugin {
 
         saveDefaultConfig();
         getCommand("test").setExecutor(new ClockCommand());
-        getCommand("test").setTabCompleter(new ClockCommand());
 
     }
 

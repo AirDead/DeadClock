@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class ClockCommand implements CommandExecutor, TabCompleter {
+public class ClockCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command __, @NotNull String ___, @NotNull String[] args) {
@@ -51,10 +51,5 @@ public class ClockCommand implements CommandExecutor, TabCompleter {
         }
 
         return true;
-    }
-
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        return null;
     }
 }
