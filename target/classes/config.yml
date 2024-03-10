@@ -1,0 +1,8 @@
+# Регион для часов
+region: "Europe/Moscow"
+
+# Материал для цифр
+numMaterial: "BEDROCK"
+
+# Материал для двоеточия
+pointMaterial: "BEDROCK"

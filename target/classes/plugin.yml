@@ -1,0 +1,7 @@
+name: DeadClock
+version: '1.0-SNAPSHOT'
+main: me.cosmodev.Plugin
+api-version: '1.20'
+commands:
+  test:
+    usage: Только для игроков
