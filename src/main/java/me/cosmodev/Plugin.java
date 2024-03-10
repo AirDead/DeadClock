@@ -1,5 +1,6 @@
 package me.cosmodev;
 
+import me.cosmodev.Commands.ClockCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Plugin extends JavaPlugin {

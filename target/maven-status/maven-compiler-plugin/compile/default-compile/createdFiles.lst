@@ -1,3 +1,4 @@
-me\cosmodev\ClockCommand.class
 me\cosmodev\Utils\BuildUtil.class
+me\cosmodev\Commands\ClockCommand.class
+me\cosmodev\Commands\SettingMenuCommand.class
 me\cosmodev\Plugin.class

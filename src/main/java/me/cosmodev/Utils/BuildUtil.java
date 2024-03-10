@@ -3,33 +3,32 @@ package me.cosmodev.Utils;
 import me.cosmodev.Plugin;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public class BuildUtil {
 
     public static void displayTimeWithBlocks(Location location, int hours, int minutes) {
         boolean use12HourFormat = Plugin.getInstance().getConfig().getBoolean("use12HourFormat", false);
+        int size = Plugin.getInstance().getConfig().getInt("size", 1);
 
         if (use12HourFormat) {
             if (hours == 0) {
-                hours = 12;
+                hours = 12; // 0 = 12
             } else if (hours > 12) {
-                hours -= 12;
+                hours -= 12; // 12 часовой формат отображения
             }
         }
-        displayDigit(location.clone().add(0, 0, 0), hours / 10);
-        displayDigit(location.clone().add(4, 0, 0), hours % 10);
-        displayColon(location.clone().add(8, 0, 0));
-        displayDigit(location.clone().add(10, 0, 0), minutes / 10);
-        displayDigit(location.clone().add(14, 0, 0), minutes % 10);
+
+        displayDigit(location.clone().add(0, 0, 0), hours / 10, size);
+        displayDigit(location.clone().add(4 * size, 0, 0), hours % 10, size);
+        displayColon(location.clone().add(8 * size, -1 * size, 0), size);
+        displayDigit(location.clone().add(10 * size, 0, 0), minutes / 10, size);
+        displayDigit(location.clone().add(14 * size, 0, 0), minutes % 10, size);
     }
 
-    private static void displayDigit(Location location, int digit) {
+    private static void displayDigit(Location location, int digit, int size) {
         Material blockMaterial = Material.valueOf(Plugin.getInstance().getConfig().getString("numMaterial", "BEDROCK").toUpperCase());
         int[][] digitShape = new int[5][3];
 
-        // Делал с помощью холста так-как по моему мнению это самый быстрый метод из возможных(И понятный)
-        // Мы вспомнили про сореву за 1 день до сдачи проекта :)
         switch (digit) {
             case 0:
                 digitShape = new int[][]{
@@ -125,16 +124,15 @@ public class BuildUtil {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 if (digitShape[i][j] == 1) {
-                    location.clone().add(j, -i, 0).getBlock().setType(blockMaterial);
-                    // Шла 4 кружка кофе и только потом я понял как это сделать
+                    location.clone().add(j * size, -i * size, 0).getBlock().setType(blockMaterial);
                 }
             }
         }
     }
 
-    private static void displayColon(Location location) {
+    private static void displayColon(Location location, int digitSize) {
         Material blockMaterial = Material.valueOf(Plugin.getInstance().getConfig().getString("pointMaterial", "BEDROCK").toUpperCase());
         location.clone().add(0, 0, 0).getBlock().setType(blockMaterial);
-        location.clone().add(0, -2, 0).getBlock().setType(blockMaterial);
+        location.clone().add(0, -2 * digitSize, 0).getBlock().setType(blockMaterial);
     }
 }
