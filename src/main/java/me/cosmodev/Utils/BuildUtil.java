@@ -8,8 +8,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class BuildUtil {
 
     public static void displayTimeWithBlocks(Location location, int hours, int minutes) {
-        hours = hours % 12;
-        if (hours == 0) hours = 12;
+        boolean use12HourFormat = Plugin.getInstance().getConfig().getBoolean("use12HourFormat", false);
+
+        if (use12HourFormat) {
+            if (hours == 0) {
+                hours = 12;
+            } else if (hours > 12) {
+                hours -= 12;
+            }
+        }
         displayDigit(location.clone().add(0, 0, 0), hours / 10);
         displayDigit(location.clone().add(4, 0, 0), hours % 10);
         displayColon(location.clone().add(8, 0, 0));

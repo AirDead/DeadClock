@@ -15,10 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-/*
- Простая реализация команды без всяких CommandManager и т.д
- */
 public class ClockCommand implements CommandExecutor, TabCompleter {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command __, @NotNull String ___, @NotNull String[] args) {
 
@@ -39,12 +37,16 @@ public class ClockCommand implements CommandExecutor, TabCompleter {
         String currentTime = sdf.format(new Date());
 
         try {
+            System.out.println("time: " + currentTime);
+
             Date date = sdf.parse(currentTime);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
 
             int hours = calendar.get(Calendar.HOUR_OF_DAY);
             int minutes = calendar.get(Calendar.MINUTE);
+            System.out.println("hour: " + hours);
+            System.out.println("min: " + minutes);
 
             BuildUtil.displayTimeWithBlocks(clockLocation, hours, minutes);
         } catch (ParseException e) {
