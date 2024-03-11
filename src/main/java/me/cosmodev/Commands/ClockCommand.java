@@ -29,6 +29,7 @@ public class ClockCommand implements CommandExecutor {
         }
 
         new BukkitRunnable() {
+            @Override
             public void run() {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 sdf.setTimeZone(TimeZone.getTimeZone(region));
