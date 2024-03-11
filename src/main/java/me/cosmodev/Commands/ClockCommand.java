@@ -23,30 +23,7 @@ public class ClockCommand implements CommandExecutor {
         Player player = (Player) sender;
         Location clockLocation = player.getLocation().clone();
 
-        String region = Plugin.getInstance().getConfig().getString("region");
-        if (region == null) {
-            region = "Europe/Moscow";
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        sdf.setTimeZone(TimeZone.getTimeZone(region));
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                try {
-                    String currentTime = sdf.format(new Date());
-                    Date date = sdf.parse(currentTime);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(date);
-
-                    int hours = calendar.get(Calendar.HOUR_OF_DAY);
-                    int minutes = calendar.get(Calendar.MINUTE);
-
-                    BuildUtil.displayTimeWithBlocks(clockLocation, hours, minutes);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.runTaskTimer(Plugin.getInstance(), 0L, 1200L);
+       BuildUtil.startClockUpdater(clockLocation);
 
         return true;
     }
