@@ -11,4 +11,5 @@ pointMaterial: "BEDROCK"
 use12HourFormat: false
 
 # Размер часов
+# Максимально рекомендуемое значение - 4
 size: 1

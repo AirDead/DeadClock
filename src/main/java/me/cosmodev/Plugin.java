@@ -11,7 +11,7 @@ public final class Plugin extends JavaPlugin {
         instance = this;
 
         saveDefaultConfig();
-        getCommand("test").setExecutor(new ClockCommand());
+        getCommand("clock").setExecutor(new ClockCommand());
 
     }
 
