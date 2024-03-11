@@ -27,15 +27,13 @@ public class ClockCommand implements CommandExecutor {
         if (region == null) {
             region = "Europe/Moscow";
         }
-
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.setTimeZone(TimeZone.getTimeZone(region));
         new BukkitRunnable() {
             @Override
             public void run() {
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                sdf.setTimeZone(TimeZone.getTimeZone(region));
-                String currentTime = sdf.format(new Date());
-
                 try {
+                    String currentTime = sdf.format(new Date());
                     Date date = sdf.parse(currentTime);
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(date);
@@ -48,7 +46,7 @@ public class ClockCommand implements CommandExecutor {
                     e.printStackTrace();
                 }
             }
-        }.runTaskTimer(Plugin.getInstance(), 0L, 1200L); 
+        }.runTaskTimer(Plugin.getInstance(), 0L, 1200L);
 
         return true;
     }
