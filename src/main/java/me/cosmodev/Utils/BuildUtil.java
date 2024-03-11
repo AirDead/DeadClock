@@ -7,14 +7,16 @@ import org.bukkit.Material;
 public class BuildUtil {
 
     public static void displayTimeWithBlocks(Location location, int hours, int minutes) {
+        clearLocation(location);
+
         boolean use12HourFormat = Plugin.getInstance().getConfig().getBoolean("use12HourFormat", false);
         int size = Plugin.getInstance().getConfig().getInt("size", 1);
 
         if (use12HourFormat) {
             if (hours == 0) {
-                hours = 12; // 0 = 12
+                hours = 12; // 0 = 12 aka полночь
             } else if (hours > 12) {
-                hours -= 12; // 12 часовой формат отображения
+                hours -= 12; // 12-часовой формат
             }
         }
 
@@ -134,5 +136,15 @@ public class BuildUtil {
         Material blockMaterial = Material.valueOf(Plugin.getInstance().getConfig().getString("pointMaterial", "BEDROCK").toUpperCase());
         location.clone().add(0, 0, 0).getBlock().setType(blockMaterial);
         location.clone().add(0, -2 * digitSize, 0).getBlock().setType(blockMaterial);
+    }
+
+    private static void clearLocation(Location location) {
+        int size = Plugin.getInstance().getConfig().getInt("size", 1);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 15; j++) {
+                location.clone().add(j * size, -i * size, 0).getBlock().setType(Material.AIR);
+            }
+        }
     }
 }
