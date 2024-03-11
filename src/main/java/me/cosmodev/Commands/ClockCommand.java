@@ -22,7 +22,7 @@ public class ClockCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command __, @NotNull String ___, @NotNull String[] args) {
 
         // Задумка в том чтобы в usage написать что комманда только для игроков
-        if (sender instanceof ConsoleCommandSender || sender instanceof CommandBlock) return false;
+        if (sender instanceof ConsoleCommandSender) return false;
 
         Player player = (Player) sender;
 
